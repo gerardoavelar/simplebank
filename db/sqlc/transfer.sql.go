@@ -20,9 +20,9 @@ INSERT INTO transfers (
 `
 
 type CreateTransferParams struct {
-	FromAccountID int64   `json:"from_account_id"`
-	ToAccountID   int64   `json:"to_account_id"`
-	Amount        float64 `json:"amount"`
+	FromAccountID int64 `json:"from_account_id"`
+	ToAccountID   int64 `json:"to_account_id"`
+	Amount        int64 `json:"amount"`
 }
 
 func (q *Queries) CreateTransfer(ctx context.Context, arg CreateTransferParams) (Transfer, error) {
@@ -59,7 +59,7 @@ func (q *Queries) GetTransfer(ctx context.Context, id int64) (Transfer, error) {
 const listTransfers = `-- name: ListTransfers :many
 SELECT id, from_account_id, to_account_id, amount, created_at FROM transfers 
 WHERE from_account_id = $1
-AND to_account_id = $2
+OR to_account_id = $2
 ORDER BY id
 LIMIT $3
 OFFSET $4
