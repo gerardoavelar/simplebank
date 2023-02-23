@@ -70,5 +70,7 @@ func TestTransferTx(t *testing.T) {
 		_, err = store.GetEntry(context.Background(), toEntry.ID)
 		require.NoError(t, err)
 
+		//TODO: Add account balanace checks
+
 	}
 }
