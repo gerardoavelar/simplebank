@@ -4,9 +4,9 @@ import "github.com/spf13/viper"
 
 // Config stores all configurations of the application
 type Config struct {
-	DBDriver      string `mapStructure:"DB_DRIVER"`
-	DBSource      string `mapStructure:"DB_SOURCE"`
-	ServerAddress string `mapStructure:"SERVER_ADDRESS"`
+	DBDriver      string `mapstructure:"DB_DRIVER"`
+	DBSource      string `mapstructure:"DB_SOURCE"`
+	ServerAddress string `mapstructure:"SERVER_ADDRESS"`
 }
 
 func LoadConfig(path string) (config Config, err error) {
