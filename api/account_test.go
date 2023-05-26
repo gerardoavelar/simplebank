@@ -100,7 +100,7 @@ func TestGetAccountAPI(t *testing.T) {
 			server := NewServer(store)
 			recorder := httptest.NewRecorder()
 
-			url := fmt.Sprintf("/account/%d", tc.accountID)
+			url := fmt.Sprintf("/accounts/%d", tc.accountID)
 			request, err := http.NewRequest(http.MethodGet, url, nil)
 			require.NoError(t, err)
 
@@ -114,7 +114,7 @@ func TestGetAccountAPI(t *testing.T) {
 
 func randomAccount() db.Account {
 	return db.Account{
-		ID:           util.RandomInt(1, 1000),
+		ID:           util.RandomInt(1, 10),
 		Owner:        util.RandomOwner(),
 		Balance:      util.RandomMoney(),
 		CurrencyCode: util.RandomCurrency(),
