@@ -19,7 +19,8 @@ import (
 )
 
 func TestGetAccountAPI(t *testing.T) {
-	account := randomAccount()
+	user, _ := randomUser(t)
+	account := randomAccount(user.Username)
 
 	testCases := []struct {
 		name          string
@@ -97,7 +98,7 @@ func TestGetAccountAPI(t *testing.T) {
 
 			//Start server
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/accounts/%d", tc.accountID)
@@ -112,10 +113,10 @@ func TestGetAccountAPI(t *testing.T) {
 
 }
 
-func randomAccount() db.Account {
+func randomAccount(owner string) db.Account {
 	return db.Account{
 		ID:           util.RandomInt(1, 10),
-		Owner:        util.RandomOwner(),
+		Owner:        owner,
 		Balance:      util.RandomMoney(),
 		CurrencyCode: util.RandomCurrency(),
 	}
